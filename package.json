@@ -10,7 +10,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "concurrently -n 'backend,frontend' -c 'red,green' \"cd server && npm run dev\" \"cd client && npm run start\"",
     "heroku-postbuild": "npm run install-client && npm run build",
-    "install-client": "cd client && npm install client",
+    "install-client": "npm install client",
     "client": "npm run start",
     "build": "cd client && npm run build"
   },
