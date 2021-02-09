@@ -28,20 +28,19 @@ import registerRouter from "./src/routes/register.js";
 // App (express) init
 const app = express();
 const MongoStore = connectMongo(session);
+const PORT = process.env.PORT || 5000;
+const URI = process.env.MONGO_URI || "mongodb://localhost:27017/userDB";
+
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(cors({
-	origin: "http://localhost:3000",
+	origin: process.env.CORS_ORIGIN || "http://localhost:3000",
 	credentials: true
 }));
 app.use(session({
-	cookie:{
-		secure: true,
-		maxAge: 60000
-	},
-	store: new MongoStore({url: process.env.MONGO_URI || "mongodb://localhost:27017/userDB"}),
-	secret: process.env.SECRET || "Thisisascret.",
-	saveUninitialized: true,
+	store: new MongoStore({url: URI}),
+	secret: process.env.SECRET || "Thisisasecret.",
+	saveUninitialized: false,
 	resave: false
 }));
 app.use(passport.initialize());
@@ -67,10 +66,7 @@ if(process.env.NODE_ENV === "production"){
 }
 
 // MongoDB and Port setup
-const PORT = process.env.PORT || 5000;
-const URI = process.env.MONGO_URI || "mongodb://localhost:27017/userDB";
-mongoose
-	.connect(URI, {
+mongoose.connect(URI, {
 		useNewUrlParser: true,
 		useUnifiedTopology: true,
 		useCreateIndex: true,
