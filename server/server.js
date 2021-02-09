@@ -7,6 +7,7 @@ import session from "express-session";
 // import _ from "lodash";
 import mongoose from "mongoose";
 import findOrCreate from "mongoose-findorcreate";
+import connectMongo from "connect-mongo";
 import passport from "passport";
 import passportLM from "passport-local-mongoose";
 import path from "path";
@@ -26,6 +27,7 @@ import registerRouter from "./src/routes/register.js";
 
 // App (express) init
 const app = express();
+const MongoStore = connectMongo(session);
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(cors({
@@ -33,9 +35,14 @@ app.use(cors({
 	credentials: true
 }));
 app.use(session({
+	cookie:{
+		secure: true,
+		maxAge: 60000
+	},
+	store: new MongoStore({url: process.env.MONGO_URI || "mongodb://localhost:27017/userDB"}),
 	secret: process.env.SECRET || "Thisisascret.",
-	resave: false,
-	saveUninitialized: false
+	saveUninitialized: true,
+	resave: false
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -75,7 +82,7 @@ mongoose
 		});
 	})
 	.catch((err) => {
-		res.status(500).json(`Server error: ${err.message}...`);
+		console.log(`Server error: ${err.message}...`);
 	});
 mongoose.connection
 	.once("open", () => {
