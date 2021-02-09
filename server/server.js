@@ -12,8 +12,8 @@ import passportLM from "passport-local-mongoose";
 import path from "path";
 
 // Config init
-import {SetupPassport} from "../config/passport.js";
-dotenv.config({path: "../config/config.env"});
+import {SetupPassport} from "./config/passport.js";
+dotenv.config({path: "./config/config.env"});
 
 // Route init
 import homeRouter from "./routes/home.js";
@@ -50,9 +50,9 @@ app.use("/register", registerRouter);
 
 // Build production init
 if(process.env.NODE_ENV === "production"){
-	app.use(express.static(path.join(__dirname, "../../client/build")));
+	app.use(express.static(path.join(__dirname, "../client/build")));
 	app.get("*", (req, res) => {
-		res.sendFile(path.join(__dirname, "../../client/build/index.html"));
+		res.sendFile(path.join(__dirname, "../client/build/index.html"));
 	});
 }
 
