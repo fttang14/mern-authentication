@@ -10,7 +10,7 @@ import Login from "./signin/Login";
 import Register from "./signin/Register";
 import ToDoList from "./application/ToDoList";
 
-export const URL = "http://localhost:5000";
+export const URL = "https://salty-scrubland-77298.herokuapp.com";
 
 export default function App() {
   return (
@@ -24,9 +24,6 @@ export default function App() {
           <PrivateRoute path="/list">
             <ToDoList />
           </PrivateRoute>
-          {/* <PrivateRoute path="/main">
-            <Main />
-          </PrivateRoute> */}
         </Switch>
       </BrowserRouter>
     </ContextProvider>
