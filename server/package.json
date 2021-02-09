@@ -5,8 +5,8 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "cd src && node server.js",
-    "dev": "cd src && nodemon server.js"
+    "start": "npm install && node server.js",
+    "dev": "nodemon server.js"
   },
   "author": "Frankii Tang",
   "license": "ISC",
