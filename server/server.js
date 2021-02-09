@@ -16,12 +16,12 @@ import {SetupPassport} from "./config/passport.js";
 dotenv.config({path: "./config/config.env"});
 
 // Route init
-import homeRouter from "./routes/home.js";
-import debugRouter from "./routes/debug.js";
-import listRouter from "./routes/list.js";
-import loginRouter from "./routes/login.js";
-import logoutRouter from "./routes/logout.js";
-import registerRouter from "./routes/register.js";
+import homeRouter from "./src/routes/home.js";
+import debugRouter from "./src/routes/debug.js";
+import listRouter from "./src/routes/list.js";
+import loginRouter from "./src/routes/login.js";
+import logoutRouter from "./src/routes/logout.js";
+import registerRouter from "./src/routes/register.js";
 
 // App (express) init
 const app = express();
